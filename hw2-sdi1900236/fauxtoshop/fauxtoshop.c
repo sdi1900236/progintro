@@ -4,14 +4,14 @@
 int main ()
 {
   unsigned char ch, header[100], **pixel;
-  int i, j;
+  int i =0, j=0;
   int padding = 0, file_size = 0, width = 0, length = 0, picture_size = 0;
 
   /* Read header */
   /*  Initialize header[10] to a high value for the loop to work, then read header[10] from the input */
   header[10] = 100;
   for ( i = 0; i < header[10]; i++ )
-    scanf("%c", header + i );
+    if (scanf("%c", header + i )) continue;
 
   /* Check header validity */
   if ( ( header[0] != 'B' ) || ( header[1] != 'M' ) )
@@ -53,13 +53,15 @@ int main ()
   /* Read data */
   for ( i = 0; i < length; i++ )
   {
-    int k;
+    int k=0;
+
     for ( j = 0; j < width * 3; j++ )
-      scanf("%c", &(pixel[i][j]) );
+      if(scanf("%c", &(pixel[i][j]) )) continue; 
 
     /* Read any padding zeros */
+    
     for ( k = 0; k < padding; k++ )
-      scanf("%c", &ch );
+      if (scanf("%c", &ch )) continue;
   }
 
   /* Check if the image size corresponds its width and length*/
