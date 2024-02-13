@@ -35,7 +35,7 @@ void free_node ( node * nd );
 int main ( int argc, char ** argv )
 {
   FILE * file;
-  int N, init_loctn_x, init_loctn_y, target_loctn_x, target_loctn_y, i, j, ** cost, **map, depth;
+  int N, init_loctn_x, init_loctn_y, target_loctn_x, target_loctn_y, i, j, ** cost, **map, depth, r;
   char ch, * output;
   node * nd;
   front * frnt;
@@ -55,7 +55,7 @@ int main ( int argc, char ** argv )
   }
 
   /* Read N */
-  fscanf ( file, "%d", &N );
+  r = fscanf ( file, "%d", &N );
   /* Allocate memoty for map and cost matrices */
   map = malloc ( N * sizeof ( int * ) );
   cost = malloc ( N * sizeof ( int * ) );
@@ -68,15 +68,15 @@ int main ( int argc, char ** argv )
   }
 
   /* Read initial and target locations */
-  fscanf ( file, "%d %d %d %d", &init_loctn_x,  &init_loctn_y, &target_loctn_x, &target_loctn_y );
+  r = fscanf ( file, "%d %d %d %d", &init_loctn_x,  &init_loctn_y, &target_loctn_x, &target_loctn_y );
 
   /* Convert map[i][j] to 0/1 (integer) */
   for ( i = 0; i < N; i++ )
   {
-    fscanf( file, "%c", &ch );
+    r = fscanf( file, "%c", &ch );
     for ( j = 0; j < N; j++ )
     {
-      fscanf ( file, "%c", &ch );
+      r = fscanf ( file, "%c", &ch );
       map[i][j] = atoi ( &ch );
       cost[i][j] = N * N;
     }
@@ -137,6 +137,7 @@ int main ( int argc, char ** argv )
     free ( cost[i] );
   free ( cost );
   free ( output );
+  i = r;
   exit(1);
 }
 
@@ -202,8 +203,9 @@ void free_node ( node * nd )
   if ( nd1->up != NULL )
     free_node ( nd1->up );
   if ( nd1->down != NULL )
+  {
     free_node ( nd1->down );
-
+  }
     free ( nd1 );
 }
 
