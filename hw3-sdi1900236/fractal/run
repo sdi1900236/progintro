@@ -1,0 +1,3 @@
+gcc  -0fast -Wall -Wextra -Werror -pedantic -c -o complexlib.o complexlib.c
+gcc  -0fast -Wall -Wextra -Werror -pedantic -c -o fractal.o fractal.c
+gcc  -o fractal fractal.o complexlib.o -lm
